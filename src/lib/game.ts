@@ -1,9 +1,11 @@
 import Phaser from "phaser";
-
+import { User } from "@/types/users";
 let score = 0;
 
 class GameScene extends Phaser.Scene {
   private scoreText!: HTMLDivElement;
+  private user!: User;
+  private helloText!: Phaser.GameObjects.Text;
 
   constructor() {
     super("GameScene");
@@ -38,6 +40,18 @@ class GameScene extends Phaser.Scene {
       score++;
       this.scoreText.textContent = `Score: ${score}`;
     });
+
+    const username = (window as any).telegramUsername || "Guest";
+
+    this.helloText = this.add
+      .text(width / 2, height / 2 - 100, `Hello, ${username}`, {
+        font: "24px Arial",
+        color: "#000",
+        backgroundColor: "#ffffffaa",
+        padding: { left: 10, right: 10, top: 5, bottom: 5 },
+        align: "center",
+      })
+      .setOrigin(0.5);
 
     this.createScoreText();
   }

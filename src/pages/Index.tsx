@@ -8,6 +8,15 @@ const Index = () => {
   useEffect(() => {
     if (!gameContainer.current) return;
 
+    const tg = (window as any).Telegram?.WebApp;
+    tg?.ready();
+
+    const user = tg?.initDataUnsafe?.user;
+    const username = user?.username || user?.first_name || "Guest";
+
+    // Stocker dans window pour l'utiliser dans Phaser ensuite
+    (window as any).telegramUsername = username;
+
     const game = new Phaser.Game({
       type: Phaser.AUTO,
       width: window.innerWidth,
