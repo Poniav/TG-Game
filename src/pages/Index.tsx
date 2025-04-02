@@ -33,6 +33,7 @@ const Index = () => {
 
   return (
     <div>
+      <p>Hello</p>
       <div ref={gameContainer} id="game-container" />
     </div>
   );
