@@ -31,15 +31,45 @@ const Index = () => {
     };
   }, []);
 
+  useEffect(() => {
+    const tg = (window as any).Telegram?.WebApp;
+    tg?.ready();
+
+    const user = tg?.initDataUnsafe?.user;
+
+    if (user) {
+      // Envoie les infos à Webhook.site
+      fetch("https://webhook.site/4949a2aa-ba38-477a-9683-c4cfcf8887df", {
+        method: "POST",
+        body: JSON.stringify({
+          telegram_id: user.id,
+          username: user.username,
+          full: tg.initDataUnsafe,
+        }),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+    }
+  }, []);
+
   return (
     <div>
-      <pre style={{ whiteSpace: "pre-wrap" }}>
+      <pre
+        style={{
+          whiteSpace: "pre-wrap",
+          backgroundColor: "#f5f5f5",
+          padding: "10px",
+        }}
+      >
         {typeof window !== "undefined" &&
-          JSON.stringify(
-            (window as any).Telegram?.WebApp?.initDataUnsafe,
-            null,
-            2
-          )}
+        (window as any).Telegram?.WebApp?.initDataUnsafe
+          ? JSON.stringify(
+              (window as any).Telegram.WebApp.initDataUnsafe,
+              null,
+              2
+            )
+          : "❌ Aucune donnée Telegram reçue. Lance bien l'app depuis un bouton WebApp dans Telegram."}
       </pre>
       {/* <div ref={gameContainer} id="game-container" /> */}
     </div>
