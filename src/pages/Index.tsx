@@ -33,8 +33,15 @@ const Index = () => {
 
   return (
     <div>
-      <p>Hello</p>
-      <div ref={gameContainer} id="game-container" />
+      <pre style={{ whiteSpace: "pre-wrap" }}>
+        {typeof window !== "undefined" &&
+          JSON.stringify(
+            (window as any).Telegram?.WebApp?.initDataUnsafe,
+            null,
+            2
+          )}
+      </pre>
+      {/* <div ref={gameContainer} id="game-container" /> */}
     </div>
   );
 };
