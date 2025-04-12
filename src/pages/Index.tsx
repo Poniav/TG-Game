@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import Phaser from "phaser";
-import GameScene from "@/lib/game";
+import GameScene from "@/lib/gameScene";
 
 const Index = () => {
   const gameContainer = useRef<HTMLDivElement>(null);
@@ -79,7 +79,7 @@ const Index = () => {
   return (
     <div>
       {/* Affichage des données Telegram (à supprimer en production) */}
-      <pre
+      {/* <pre
         style={{
           whiteSpace: "pre-wrap",
           backgroundColor: "#f5f5f5",
@@ -93,7 +93,7 @@ const Index = () => {
         {telegramData
           ? JSON.stringify(telegramData, null, 2)
           : "❌ Aucune donnée Telegram reçue. Lance bien l'app depuis un bouton WebApp dans Telegram."}
-      </pre>
+      </pre> */}
 
       {/* Conteneur du jeu */}
       <div
@@ -101,7 +101,7 @@ const Index = () => {
         id="game-container"
         style={{
           width: "100%",
-          height: "calc(100vh - 220px)",
+          height: "calc(100vh - 20px)", // Utiliser presque toute la hauteur de l'écran
           border: "1px solid #ccc",
         }}
       />
