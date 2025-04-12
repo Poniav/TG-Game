@@ -52,7 +52,8 @@ const Index = () => {
     if (!gameContainer.current || !isGameReady) return;
 
     const game = new Phaser.Game({
-      type: Phaser.AUTO,
+      type: Phaser.CANVAS,
+      // type: Phaser.AUTO,
       width: window.innerWidth,
       height: window.innerHeight,
       backgroundColor: "#87CEEB",
@@ -62,10 +63,15 @@ const Index = () => {
         mode: Phaser.Scale.RESIZE,
         autoCenter: Phaser.Scale.CENTER_BOTH,
       },
+      render: {
+        pixelArt: false, // Mettre à true si vous utilisez du pixel art
+        antialias: true, // Améliore la netteté des images non-pixel art
+        roundPixels: true, // Force l'alignement sur des pixels entiers
+      },
       physics: {
         default: "arcade",
         arcade: {
-          gravity: { y: 300 },
+          gravity: { x: 0, y: 300 },
           debug: false,
         },
       },
@@ -101,8 +107,7 @@ const Index = () => {
         id="game-container"
         style={{
           width: "100%",
-          height: "calc(100vh - 20px)", // Utiliser presque toute la hauteur de l'écran
-          border: "1px solid #ccc",
+          height: "100vh",
         }}
       />
     </div>

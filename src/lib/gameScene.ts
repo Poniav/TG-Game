@@ -22,36 +22,33 @@ export default class GameScene extends Phaser.Scene {
   }
 
   create() {
+    const widthCamera = this.cameras.main.width;
+    const heightCamera = this.cameras.main.height;
+
     // Récupérer le nom d'utilisateur Telegram
     this.username = (window as any).telegramUsername || "Guest";
 
     // Créer le background adapté à l'écran
     this.bg = this.add
-      .tileSprite(
-        0,
-        0,
-        this.cameras.main.width,
-        this.cameras.main.height,
-        "background"
-      )
+      .tileSprite(0, 0, widthCamera * 2, heightCamera * 2, "background")
       .setOrigin(0, 0);
 
     // Ajuster l'échelle du background pour qu'il couvre l'écran
     this.bg.setScale(
-      Math.max(this.cameras.main.width / this.bg.width, 1),
-      Math.max(this.cameras.main.height / this.bg.height, 1)
+      Math.max(widthCamera / this.bg.width, 0.1),
+      Math.max(heightCamera / this.bg.height, 0.1)
     );
 
     // Créer le joueur (poisson)
     this.player = this.physics.add.sprite(
-      this.cameras.main.width / 2,
-      this.cameras.main.height - 100,
+      widthCamera / 2,
+      heightCamera - 100,
       "fish"
     );
     this.player.setCollideWorldBounds(true);
 
     // Ajuster la taille du poisson
-    const fishScale = Math.min(this.cameras.main.width / 1280, 1) * 0.7; // Adaptation selon la taille d'écran
+    const fishScale = Math.min(widthCamera / 1280, 1) * 0.4; // Adaptation selon la taille d'écran
     this.player.setScale(fishScale);
 
     // Créer le groupe d'obstacles
@@ -165,16 +162,13 @@ export default class GameScene extends Phaser.Scene {
       this.cameras.main.width - this.player.displayWidth
     );
 
-    // Créer l'obstacle
-    const obstacle = this.obstacles.create(
-      x,
-      -50, // Juste au-dessus de l'écran
-      "obstacle"
-    );
-
     // Adapter la taille de l'obstacle à l'écran
-    const obstacleScale = Math.min(this.cameras.main.width / 1280, 1) * 0.8;
-    obstacle.setScale(obstacleScale);
+    const gameScale = Math.min(
+      this.cameras.main.width / 800,
+      this.cameras.main.height / 1400
+    );
+    const obstacle = this.obstacles.create(x, -50, "obstacle");
+    obstacle.setScale(gameScale * 0.2); // Taille encore plus réduite
 
     // Définir la vitesse (vers le bas de l'écran)
     obstacle.setVelocityY(this.gameSpeed);
