@@ -16,17 +16,16 @@ export default class GameScene extends Phaser.Scene {
   }
 
   preload() {
-    // Charger le poisson (vue du dessus)
-    this.load.image("background", "/assets/background.png"); // Un fond bleu simple pour l'océan
-    this.load.image("fish", "/assets/Merlin.png"); // Votre première image
-    this.load.image("obstacle", "/assets/Rock.png"); // Votre seconde image (rocher)
+    this.load.image("fish", "/assets/fish.png");
+    this.load.image("obstacle", "/assets/obstacle.png");
+    this.load.image("background", "/assets/ocean_bg.png");
   }
 
   create() {
     // Récupérer le nom d'utilisateur Telegram
     this.username = (window as any).telegramUsername || "Guest";
 
-    // Fond d'océan (bleu)
+    // Créer le background adapté à l'écran
     this.bg = this.add
       .tileSprite(
         0,
@@ -37,6 +36,12 @@ export default class GameScene extends Phaser.Scene {
       )
       .setOrigin(0, 0);
 
+    // Ajuster l'échelle du background pour qu'il couvre l'écran
+    this.bg.setScale(
+      Math.max(this.cameras.main.width / this.bg.width, 1),
+      Math.max(this.cameras.main.height / this.bg.height, 1)
+    );
+
     // Créer le joueur (poisson)
     this.player = this.physics.add.sprite(
       this.cameras.main.width / 2,
@@ -46,8 +51,8 @@ export default class GameScene extends Phaser.Scene {
     this.player.setCollideWorldBounds(true);
 
     // Ajuster la taille du poisson
-    // this.player.setDisplaySize(90, 120);
-    this.player.setDisplaySize(120, 150);
+    const fishScale = Math.min(this.cameras.main.width / 1280, 1) * 0.7; // Adaptation selon la taille d'écran
+    this.player.setScale(fishScale);
 
     // Créer le groupe d'obstacles
     this.obstacles = this.physics.add.group();
@@ -77,34 +82,61 @@ export default class GameScene extends Phaser.Scene {
       this
     );
 
-    // Contrôles pour déplacer le poisson
+    // Contrôles tactiles améliorés
+    this.input.on("pointerdown", (pointer) => {
+      this.updatePlayerPosition(pointer.x);
+    });
+
     this.input.on("pointermove", (pointer) => {
-      if (!this.isGameOver) {
-        this.player.x = Phaser.Math.Clamp(
-          pointer.x,
-          this.player.width / 2,
-          this.cameras.main.width - this.player.width / 2
-        );
+      if (pointer.isDown) {
+        this.updatePlayerPosition(pointer.x);
       }
+    });
+
+    // Contrôles clavier pour les tests
+    this.input.keyboard.on("keydown-LEFT", () => {
+      this.player.x -= 20;
+    });
+
+    this.input.keyboard.on("keydown-RIGHT", () => {
+      this.player.x += 20;
+    });
+  }
+
+  updatePlayerPosition(x: number) {
+    if (this.isGameOver) return;
+
+    // Animation fluide vers la position cible
+    this.tweens.add({
+      targets: this.player,
+      x: Phaser.Math.Clamp(
+        x,
+        this.player.displayWidth / 2,
+        this.cameras.main.width - this.player.displayWidth / 2
+      ),
+      duration: 100,
+      ease: "Power2",
     });
   }
 
   update() {
     if (this.isGameOver) return;
 
+    // Faire défiler le background
+    this.bg.tilePositionY -= 2;
+
     // Augmenter progressivement le score
     this.score += 0.1;
     this.scoreText.setText(`Score: ${Math.floor(this.score)}`);
 
-    this.bg.tilePositionY -= 0.5;
-
     // Augmenter la difficulté avec le temps
-    if (this.score > 0 && this.score % 100 === 0) {
-      this.gameSpeed += 10;
+    if (this.score > 0 && this.score % 50 === 0) {
+      // Réduit à 50 pour que la difficulté augmente plus vite
+      this.gameSpeed += 20;
 
-      // Créer un nouveau timer avec un délai réduit
+      // Nouveau timer avec délai réduit
       this.spawnTimer.remove();
-      const newDelay = Math.max(300, 1500 - Math.floor(this.score / 100) * 50);
+      const newDelay = Math.max(400, 1500 - Math.floor(this.score / 50) * 100);
       this.spawnTimer = this.time.addEvent({
         delay: newDelay,
         callback: this.spawnObstacle,
@@ -113,8 +145,8 @@ export default class GameScene extends Phaser.Scene {
       });
     }
 
-    // Déplacer le poisson automatiquement vers le haut
-    this.player.y -= 1;
+    // Le poisson se déplace automatiquement vers le haut
+    // (Pas besoin de coder ça explicitement car le fond défilant donne déjà cette impression)
 
     // Supprimer les obstacles qui sont sortis de l'écran
     this.obstacles.getChildren().forEach((obstacle: any) => {
@@ -128,7 +160,10 @@ export default class GameScene extends Phaser.Scene {
     if (this.isGameOver) return;
 
     // Position aléatoire en largeur
-    const x = Phaser.Math.Between(50, this.cameras.main.width - 50);
+    const x = Phaser.Math.Between(
+      this.player.displayWidth,
+      this.cameras.main.width - this.player.displayWidth
+    );
 
     // Créer l'obstacle
     const obstacle = this.obstacles.create(
@@ -137,8 +172,9 @@ export default class GameScene extends Phaser.Scene {
       "obstacle"
     );
 
-    // Ajuster la taille
-    obstacle.setDisplaySize(80, 80);
+    // Adapter la taille de l'obstacle à l'écran
+    const obstacleScale = Math.min(this.cameras.main.width / 1280, 1) * 0.8;
+    obstacle.setScale(obstacleScale);
 
     // Définir la vitesse (vers le bas de l'écran)
     obstacle.setVelocityY(this.gameSpeed);
