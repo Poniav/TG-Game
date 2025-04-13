@@ -1,8 +1,10 @@
 import { useEffect, useRef, useState } from "react";
+import Phaser from "phaser";
+import GameScene from "@/lib/gameScene";
+import Menu from "@/components/Menu";
 import Home from "@/components/Home";
-import Wrapper from "@/lib/wrapper";
-import "@/assets/app.css";
-const Index = () => {
+
+const Tasks = () => {
   const [telegramData, setTelegramData] = useState<any>(null);
 
   // Effet pour initialiser Telegram WebApp et récupérer les données utilisateur
@@ -44,10 +46,28 @@ const Index = () => {
   }, []);
 
   return (
-    <Wrapper>
-      <Home />
-    </Wrapper>
+    <div>
+      {/* Affichage des données Telegram (à supprimer en production) */}
+      {/* <pre
+        style={{
+          whiteSpace: "pre-wrap",
+          backgroundColor: "#f5f5f5",
+          padding: "10px",
+          fontSize: "12px",
+          maxHeight: "200px",
+          overflow: "auto",
+          marginBottom: "10px",
+        }}
+      >
+        {telegramData
+          ? JSON.stringify(telegramData, null, 2)
+          : "❌ Aucune donnée Telegram reçue. Lance bien l'app depuis un bouton WebApp dans Telegram."}
+      </pre> */}
+
+      {/* Conteneur du jeu */}
+      <Menu />
+    </div>
   );
 };
 
-export default Index;
+export default Tasks;

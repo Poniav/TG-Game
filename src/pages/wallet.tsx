@@ -1,8 +1,10 @@
 import { useEffect, useRef, useState } from "react";
+import Phaser from "phaser";
+import GameScene from "@/lib/gameScene";
+import Menu from "@/components/Menu";
 import Home from "@/components/Home";
-import Wrapper from "@/lib/wrapper";
-import "@/assets/app.css";
-const Index = () => {
+
+const Wallet = () => {
   const [telegramData, setTelegramData] = useState<any>(null);
 
   // Effet pour initialiser Telegram WebApp et récupérer les données utilisateur
@@ -44,10 +46,11 @@ const Index = () => {
   }, []);
 
   return (
-    <Wrapper>
-      <Home />
-    </Wrapper>
+    <div>
+      <h1>Wallet</h1>
+      <Menu />
+    </div>
   );
 };
 
-export default Index;
+export default Wallet;
