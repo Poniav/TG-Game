@@ -26,7 +26,7 @@ const MenuItem: React.FC<MenuItemProps> = ({
   return (
     <div
       className={`flex flex-col items-center justify-center p-1 cursor-pointer transition-all duration-300 ${
-        isActive ? "text-yellow-500 -translate-y-2" : "text-gray-400"
+        isActive ? "text-yellow-200 -translate-y-2" : "text-yellow-300"
       }`}
       onClick={onClick}
     >
@@ -93,19 +93,26 @@ const Menu = () => {
   ];
 
   return (
-    <div className="fixed bottom-0 left-0 right-0 h-16 bg-white border-t border-gray-800 shadow-lg z-50">
-      <div className="flex justify-around items-center h-full max-w-md mx-auto px-2">
-        {menuItems.map((item) => (
-          <MenuItem
-            key={item.path}
-            icon={item.icon}
-            activeIcon={item.activeIcon}
-            label={item.label}
-            path={item.path}
-            isActive={activePath === item.path}
-            onClick={() => handleNavigation(item.path)}
-          />
-        ))}
+    <div className="fixed bottom-0 left-0 right-0 h-16 bg-white border-t border-gray-800 shadow-lg z-50 mb-4">
+      <div className="h-1 w-full bg-gradient-to-r from-yellow-400 via-yellow-300 to-yellow-400"></div>
+
+      {/* Conteneur principal avec effet 3D */}
+      <div className="relative bg-gradient-to-b from-yellow-500 to-yellow-600 shadow-lg border-t border-yellow-300">
+        {/* Effet d'ombre interne pour le style 3D */}
+        <div className="absolute inset-0 bg-black opacity-10 rounded-t-lg"></div>
+        <div className="flex justify-around items-center h-full max-w-md mx-auto px-2">
+          {menuItems.map((item) => (
+            <MenuItem
+              key={item.path}
+              icon={item.icon}
+              activeIcon={item.activeIcon}
+              label={item.label}
+              path={item.path}
+              isActive={activePath === item.path}
+              onClick={() => handleNavigation(item.path)}
+            />
+          ))}
+        </div>
       </div>
     </div>
   );
