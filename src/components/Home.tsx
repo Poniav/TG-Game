@@ -15,6 +15,14 @@ const Home = () => {
         }}
       />
       <img src={bg} alt="bg" className="w-full h-full object-cover" />
+      <div className="absolute inset-0 w-full h-[300px] flex flex-col items-center justify-center">
+        <h1 className="text-white text-6xl font-bold stroke-effect">
+          Season 1
+        </h1>
+        <p className="text-white text-xl stroke-effect-small">
+          Dive into the ocean
+        </p>
+      </div>
       <img src={Fish} alt="Fish" className="absolute fish-home" />
     </div>
   );

@@ -4,3 +4,44 @@
   bottom: 160px;
 }
 
+.btn-primary-scheme {
+  background: linear-gradient(to right, #14532D 70%, #2a9053 30%);
+  background-position: 80% 0;
+  transition: background-position 0.5s ease-in-out;
+  transform: skew(-50deg);
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: -1;
+}
+
+.btn-primary-scheme:hover {
+  background-position: 0 0;
+}
+
+.stroke-effect {
+    color: white;
+    font-family: "Titan One", sans-serif;
+    font-weight: 400;
+    text-transform: uppercase;
+    font-style: normal;
+    text-shadow: 0px 3px 0px #000000;
+}
+
+.stroke-effect-small {
+    color: white;
+    font-family: "Titan One", sans-serif;
+    font-weight: 200;
+    text-transform: uppercase;
+    font-style: normal;
+    text-shadow: 0px 3px 0px #000000;
+}
+
+.inter-font {
+    font-family: "Inter", sans-serif; 
+    font-optical-sizing: auto;
+    font-weight: 400; 
+    font-style: normal;
+}

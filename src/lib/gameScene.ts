@@ -1,5 +1,7 @@
 import Phaser from "phaser";
-
+import bg from "@/assets/bg-ocean.png";
+import marlin from "@/assets/marlin.png";
+import rock from "@/assets/rock.png";
 export default class GameScene extends Phaser.Scene {
   player: Phaser.Physics.Arcade.Sprite;
   obstacles: Phaser.Physics.Arcade.Group;
@@ -16,9 +18,9 @@ export default class GameScene extends Phaser.Scene {
   }
 
   preload() {
-    this.load.image("fish", "/assets/fish.png");
-    this.load.image("obstacle", "/assets/obstacle.png");
-    this.load.image("background", "/assets/ocean_bg.png");
+    this.load.image("fish", marlin);
+    this.load.image("obstacle", rock);
+    this.load.image("background", bg);
   }
 
   create() {

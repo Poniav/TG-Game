@@ -1,0 +1,42 @@
+[
+  {
+    "id": 1,
+    "name": "Follow Marlin on Telegram",
+    "points": 100,
+    "icon": "https://i.imgur.com/1234567890.png",
+    "link": "https://t.me/marlin_game",
+    "completed": false
+  },
+  {
+    "id": 2,
+    "name": "Join our discord server",
+    "points": 150,
+    "icon": "https://i.imgur.com/1234567890.png",
+    "link": "https://discord.gg/marlin",
+    "completed": false
+  },
+  {
+    "id": 3,
+    "name": "Follow Marlin on Instagram",
+    "points": 200,
+    "icon": "https://i.imgur.com/1234567890.png",
+    "link": "https://www.instagram.com/marlin_game",
+    "completed": false
+  },
+  {
+    "id": 4,
+    "name": "Share the game on Twitter",
+    "points": 200,
+    "icon": "https://i.imgur.com/1234567890.png",
+    "link": "https://www.twitter.com/marlin_game",
+    "completed": false
+  },
+  {
+    "id": 5,
+    "name": "Share the game on Facebook",
+    "points": 200,
+    "icon": "https://i.imgur.com/1234567890.png",
+    "link": "https://www.facebook.com/marlin_game",
+    "completed": false
+  }
+]
