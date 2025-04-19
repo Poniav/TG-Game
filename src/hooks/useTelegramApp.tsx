@@ -60,6 +60,8 @@ export function useTelegramWebApp(): TelegramWebAppHookResult {
 
       tg.ready();
 
+      tg.showAlert(JSON.stringify(tg));
+
       const isMobileUser = checkIsMobile(tg);
       setIsMobile(isMobileUser);
 
