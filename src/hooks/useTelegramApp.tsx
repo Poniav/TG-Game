@@ -28,12 +28,7 @@ export function useTelegramWebApp(): TelegramWebAppHookResult {
   useEffect(() => {
     const checkIsMobile = (tg: TelegramWebApp | null): boolean => {
       if (tg && tg.platform) {
-        if (
-          tg.platform === "android" ||
-          tg.platform === "ios" ||
-          tg.platform === "tdesktop" ||
-          tg.platform === "macos"
-        ) {
+        if (tg.platform === "android" || tg.platform === "ios") {
           return true;
         }
       }
@@ -55,7 +50,6 @@ export function useTelegramWebApp(): TelegramWebAppHookResult {
         setTelegramWebApp(null);
         return;
       }
-      tg.showAlert(tg.platform);
 
       setTelegramWebApp(tg);
 
@@ -72,6 +66,7 @@ export function useTelegramWebApp(): TelegramWebAppHookResult {
 
         if (tg.isVersionAtLeast("8.0")) {
           tg.requestFullscreen();
+          tg.lockOrientation();
         }
       }
 
