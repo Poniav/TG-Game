@@ -27,15 +27,14 @@ export function useTelegramWebApp(): TelegramWebAppHookResult {
 
   useEffect(() => {
     const checkIsMobile = (tg: TelegramWebApp | null): boolean => {
+      let isMobile = false;
       if (tg && tg.platform) {
         if (tg.platform === "android" || tg.platform === "ios") {
-          return true;
+          isMobile = true;
         }
       }
 
-      const isSmallScreen = window.innerWidth <= 768;
-
-      return isSmallScreen;
+      return isMobile;
     };
 
     const initTelegramWebApp = () => {
@@ -61,9 +60,8 @@ export function useTelegramWebApp(): TelegramWebAppHookResult {
       setPlatform(tg.platform || "unknown");
       setColorScheme(tg.colorScheme || "light");
 
-      tg.expand();
-
       if (isMobileUser) {
+        tg.expand();
         if (tg.isVersionAtLeast("8.0")) {
           tg.requestFullscreen();
           tg.lockOrientation();
