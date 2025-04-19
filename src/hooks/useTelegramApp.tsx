@@ -50,12 +50,12 @@ export function useTelegramWebApp(): TelegramWebAppHookResult {
         console.warn(
           "Telegram WebApp is not available. Running in standalone mode."
         );
-        tg.showAlert(tg.platform);
         setIsReady(true);
         setIsMobile(window.innerWidth <= 768);
         setTelegramWebApp(null);
         return;
       }
+      tg.showAlert(tg.platform);
 
       setTelegramWebApp(tg);
 
