@@ -36,7 +36,7 @@ const Tasks = () => {
               <div className="flex items-center justify-between w-full">
                 <div className="flex items-center gap-3">
                   <div className="w-10 h-10 bg-white rounded-full flex items-center justify-center border-2 border-black">
-                    <img src={task.icon} alt={task.name} className="w-6 h-6" />
+                    <img src={task.icon} alt={task.alt} className="w-6 h-6" />
                   </div>
                   <div className="flex flex-col justify-between">
                     <span className="text-sm inter-font">{task.name}</span>

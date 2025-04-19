@@ -96,12 +96,15 @@ const Menu = () => {
   ];
 
   return (
-    <div className="fixed bottom-0 left-0 right-0 h-16 bg-white border-t border-gray-800 shadow-lg z-50 mb-4">
+    <div
+      className="fixed bottom-0 left-0 right-0 z-50"
+      style={{ marginBottom: "0", height: "5rem" }}
+    >
       {/* Bordure supérieure brillante */}
       <div className="h-0.5 w-full bg-gradient-to-r from-yellow-200 via-yellow-400 to-yellow-200 shadow-md"></div>
 
       {/* Conteneur du menu avec effet 3D */}
-      <div className="relative">
+      <div className="relative h-full">
         {/* Fond avec dégradé pour effet 3D */}
         <div className="absolute inset-0 bg-gradient-to-b from-yellow-500 to-yellow-600"></div>
 
@@ -113,6 +116,7 @@ const Menu = () => {
 
         {/* Ombre en bas */}
         <div className="absolute inset-x-0 bottom-0 h-1 bg-gradient-to-t from-yellow-700 to-transparent opacity-30"></div>
+
         <div className="flex justify-around items-center h-full max-w-md mx-auto px-2">
           {menuItems.map((item) => (
             <MenuItem
