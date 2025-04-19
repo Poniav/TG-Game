@@ -61,12 +61,13 @@ export function useTelegramWebApp(): TelegramWebAppHookResult {
       setPlatform(tg.platform || "unknown");
       setColorScheme(tg.colorScheme || "light");
 
-      if (isMobileUser) {
-        tg.expand();
+      tg.expand();
 
+      if (isMobileUser) {
         if (tg.isVersionAtLeast("8.0")) {
           tg.requestFullscreen();
           tg.lockOrientation();
+          tg.disableVerticalSwipes();
         }
       }
 
