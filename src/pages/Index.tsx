@@ -13,10 +13,10 @@ const Index = () => {
       // Indiquer à Telegram que l'application est prête
       tg.ready();
 
-      // Étendre l'app à la taille maximale
-      setTimeout(() => {
-        tg.expand();
-      }, 100);
+      tg.expand();
+      if (tg.isVersionAtLeast("8.0")) {
+        tg.requestFullscreen();
+      }
 
       // Récupérer les informations utilisateur
       const user = tg.initDataUnsafe?.user;
