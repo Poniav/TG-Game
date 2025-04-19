@@ -62,10 +62,10 @@ export function useTelegramWebApp(): TelegramWebAppHookResult {
 
       if (isMobileUser) {
         tg.expand();
+        tg.disableVerticalSwipes();
         if (tg.isVersionAtLeast("8.0")) {
           tg.requestFullscreen();
           tg.lockOrientation();
-          tg.disableVerticalSwipes();
         }
       }
 
@@ -82,10 +82,6 @@ export function useTelegramWebApp(): TelegramWebAppHookResult {
           firstName: userData.first_name,
           lastName: userData.last_name,
         });
-
-        // (window as any).telegramUsername =
-        //   userData.username || userData.first_name || "Guest";
-        // (window as any).telegramUserId = userData.id;
       }
 
       setIsReady(true);
