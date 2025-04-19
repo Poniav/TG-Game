@@ -61,7 +61,7 @@ export function useTelegramWebApp(): TelegramWebAppHookResult {
       setColorScheme(tg.colorScheme || "light");
 
       if (isMobileUser) {
-        // tg.expand();
+        tg.expand();
         tg.disableVerticalSwipes();
         if (tg.isVersionAtLeast("8.0")) {
           tg.requestFullscreen();
@@ -95,6 +95,7 @@ export function useTelegramWebApp(): TelegramWebAppHookResult {
 
       if (newIsMobile && tg) {
         tg.expand();
+        tg.disableVerticalSwipes();
       }
     };
 
