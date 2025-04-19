@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import Home from "@/components/Home";
 import Wrapper from "@/lib/wrapper";
-import "@/assets/app.css";
+import "@/assets/css/app.css";
 const Index = () => {
   const [telegramData, setTelegramData] = useState<any>(null);
 

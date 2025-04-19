@@ -1,5 +1,5 @@
-import Fish from "@/assets/fish.png";
-import bg from "@/assets/bg.png";
+import Fish from "@/assets/elements/fish.png";
+import bg from "@/assets/elements/bg.png";
 
 const Home = () => {
   return (

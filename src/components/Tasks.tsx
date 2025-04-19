@@ -1,7 +1,7 @@
-import Fish from "@/assets/fish.png";
-import bg from "@/assets/bg.png";
+import Fish from "@/assets/elements/fish.png";
+import bg from "@/assets/elements/bg.png";
 import BtnPrimary from "@/components/BtnPrimary";
-import tasksList from "@/assets/tasks/tasks_list.json";
+import tasksList from "@/assets/config/tasks_list.json";
 import { useState } from "react";
 
 const Tasks = () => {

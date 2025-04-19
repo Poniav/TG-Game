@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
-import HomeIcon from "@/assets/home-icon.png";
-import PlayIcon from "@/assets/play-icon.png";
-import WalletIcon from "@/assets/wallet-icon.png";
-import TasksIcon from "@/assets/task-icon.png";
+import HomeIcon from "@/assets/icons/home-icon.png";
+import PlayIcon from "@/assets/icons/play-icon.png";
+import WalletIcon from "@/assets/icons/wallet-icon.png";
+import TasksIcon from "@/assets/icons/task-icon.png";
 import { useLocation, useNavigate } from "react-router-dom";
 
 // Interface pour les props des éléments du menu

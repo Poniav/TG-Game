@@ -1,7 +1,7 @@
 import Phaser from "phaser";
-import bg from "@/assets/bg-ocean.png";
-import marlin from "@/assets/marlin.png";
-import rock from "@/assets/rock.png";
+import bg from "@/assets/elements/bg-ocean.png";
+import marlin from "@/assets/elements/marlin.png";
+import rock from "@/assets/elements/rock.png";
 export default class GameScene extends Phaser.Scene {
   player: Phaser.Physics.Arcade.Sprite;
   obstacles: Phaser.Physics.Arcade.Group;
