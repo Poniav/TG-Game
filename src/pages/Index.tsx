@@ -14,7 +14,9 @@ const Index = () => {
       tg.ready();
 
       // Étendre l'app à la taille maximale
-      tg.expand();
+      setTimeout(() => {
+        tg.expand();
+      }, 100);
 
       // Récupérer les informations utilisateur
       const user = tg.initDataUnsafe?.user;
