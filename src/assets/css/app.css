@@ -77,3 +77,45 @@
 .fixed {
   position: fixed !important;
 }
+
+:root {
+  --tg-safe-area-top: 0px;
+  --tg-safe-area-bottom: 0px;
+  --tg-safe-area-left: 0px;
+  --tg-safe-area-right: 0px;
+}
+
+.safe-area-padding {
+  padding-top: var(--tg-safe-area-top);
+  padding-bottom: var(--tg-safe-area-bottom);
+  padding-left: var(--tg-safe-area-left);
+  padding-right: var(--tg-safe-area-right);
+}
+
+.safe-area-padding-top {
+  padding-top: var(--tg-safe-area-top);
+}
+
+.safe-area-margin-top {
+  margin-top: var(--tg-safe-area-top);
+}
+
+.scrollable-content {
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  height: calc(100vh - 4rem - var(--tg-safe-area-top) - var(--tg-safe-area-bottom));
+  padding-bottom: 5rem;
+}
+
+.task-list-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 1rem;
+  padding-top: calc(var(--tg-safe-area-top) + 1rem);
+  padding-bottom: calc(var(--tg-safe-area-bottom) + 5rem);
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}

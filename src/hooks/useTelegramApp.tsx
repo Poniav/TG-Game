@@ -37,6 +37,27 @@ export function useTelegramWebApp(): TelegramWebAppHookResult {
       return isMobile;
     };
 
+    const updateSafeAreaVars = (tg: TelegramWebApp) => {
+      if (tg.safeAreaInset) {
+        document.documentElement.style.setProperty(
+          "--tg-safe-area-top",
+          `${tg.safeAreaInset.top}px`
+        );
+        document.documentElement.style.setProperty(
+          "--tg-safe-area-bottom",
+          `${tg.safeAreaInset.bottom}px`
+        );
+        document.documentElement.style.setProperty(
+          "--tg-safe-area-left",
+          `${tg.safeAreaInset.left}px`
+        );
+        document.documentElement.style.setProperty(
+          "--tg-safe-area-right",
+          `${tg.safeAreaInset.right}px`
+        );
+      }
+    };
+
     const initTelegramWebApp = () => {
       const tg = window.Telegram?.WebApp || null;
 
@@ -67,11 +88,13 @@ export function useTelegramWebApp(): TelegramWebAppHookResult {
           tg.requestFullscreen();
           tg.lockOrientation();
         }
+        updateSafeAreaVars(tg);
       }
 
       if (tg.isVersionAtLeast("6.1")) {
         tg.setBackgroundColor("#000000");
-        tg.setHeaderColor("#000000");
+        // TODO: add custom header color
+        // tg.setHeaderColor("#000000");
       }
 
       if (tg.isVersionAtLeast("7.10")) {
