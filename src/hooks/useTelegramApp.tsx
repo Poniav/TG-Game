@@ -58,7 +58,7 @@ export function useTelegramWebApp(): TelegramWebAppHookResult {
       setIsMobile(isMobileUser);
 
       setPlatform(tg.platform || "unknown");
-      setColorScheme(tg.colorScheme || "light");
+      setColorScheme(tg.colorScheme || "dark");
 
       if (isMobileUser) {
         tg.expand();
@@ -70,7 +70,12 @@ export function useTelegramWebApp(): TelegramWebAppHookResult {
       }
 
       if (tg.isVersionAtLeast("6.1")) {
-        tg.setBackgroundColor("#87CEEB");
+        tg.setBackgroundColor("#000000");
+        tg.setHeaderColor("#000000");
+      }
+
+      if (tg.isVersionAtLeast("7.10")) {
+        tg.setBottomBarColor("#FFFFFF");
       }
 
       if (tg.initDataUnsafe?.user) {
