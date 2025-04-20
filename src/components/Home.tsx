@@ -3,7 +3,7 @@ import bg from "@/assets/elements/bg.png";
 
 const Home = () => {
   return (
-    <div className="relative w-full h-screen pb-16 overflow-hidden">
+    <div className="relative w-full h-full pb-16 overflow-hidden">
       {/* Background image with proper styling to cover the full height */}
       <div
         className="absolute inset-0 w-full h-full"
