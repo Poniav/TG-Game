@@ -3,24 +3,35 @@ import bg from "@/assets/elements/bg.png";
 import BtnPrimary from "@/components/BtnPrimary";
 import tasksList from "@/assets/config/tasks_list.json";
 import { useState } from "react";
-
+import useTelegramWebApp from "@/hooks/useTelegramApp";
 const Tasks = () => {
   const [tasks, setTasks] = useState(tasksList);
+  const { areaInsets } = useTelegramWebApp();
   return (
     <div className="relative w-full h-screen pb-16 overflow-hidden">
-      {/* Background image with proper styling to cover the full height */}
-      <div
-        className="absolute inset-0 w-full h-full"
-        style={{
-          backgroundImage: `url(${bg})`,
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-          backgroundRepeat: "no-repeat",
-        }}
-      />
-      <img src={bg} alt="bg" className="w-full h-full object-cover" />
+      {/* Background image - pas de safe area */}
+      <div className="absolute inset-0 w-full h-full">
+        <div
+          style={{
+            backgroundImage: `url(${bg})`,
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+            backgroundRepeat: "no-repeat",
+            height: "100%",
+            width: "100%",
+          }}
+        />
+      </div>
       {/* List */}
-      <div className="absolute inset-0 w-full h-full p-4">
+      <div
+        className="absolute inset-0 w-full h-full p-4"
+        style={{
+          paddingBottom: `${areaInsets.bottom}px`,
+          paddingTop: `${areaInsets.top}px`,
+          paddingLeft: `${areaInsets.left}px`,
+          paddingRight: `${areaInsets.right}px`,
+        }}
+      >
         <div className="flex flex-col items-center justify-center text-white mb-4">
           <h1 className="text-2xl font-bold stroke-effect">Do your tasks</h1>
           <p className="text-xs stroke-effect-small">

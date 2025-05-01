@@ -13,11 +13,23 @@ interface TelegramWebAppHookResult {
   platform: string;
   colorScheme: string;
   telegramWebApp: TelegramWebApp | null;
+  areaInsets: {
+    top: number;
+    bottom: number;
+    left: number;
+    right: number;
+  };
 }
 
 export function useTelegramWebApp(): TelegramWebAppHookResult {
   const [isReady, setIsReady] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
+  const [areaInsets, setAreaInsets] = useState({
+    top: 0,
+    bottom: 0,
+    left: 0,
+    right: 0,
+  });
   const [user, setUser] = useState<TelegramWebAppHookResult["user"]>(null);
   const [platform, setPlatform] = useState<string>("");
   const [colorScheme, setColorScheme] = useState<string>("light");
@@ -38,23 +50,19 @@ export function useTelegramWebApp(): TelegramWebAppHookResult {
     };
 
     const updateSafeAreaVars = (tg: TelegramWebApp) => {
-      if (tg.safeAreaInset) {
-        document.documentElement.style.setProperty(
-          "--tg-safe-area-top",
-          `${tg.safeAreaInset.top}px`
-        );
-        document.documentElement.style.setProperty(
-          "--tg-safe-area-bottom",
-          `${tg.safeAreaInset.bottom}px`
-        );
-        document.documentElement.style.setProperty(
-          "--tg-safe-area-left",
-          `${tg.safeAreaInset.left}px`
-        );
-        document.documentElement.style.setProperty(
-          "--tg-safe-area-right",
-          `${tg.safeAreaInset.right}px`
-        );
+      if (tg.contentSafeAreaInset && tg.safeAreaInset) {
+        setAreaInsets({
+          top: Math.max(tg.safeAreaInset.top, tg.contentSafeAreaInset.top),
+          bottom: Math.max(
+            tg.safeAreaInset.bottom,
+            tg.contentSafeAreaInset.bottom
+          ),
+          left: Math.max(tg.safeAreaInset.left, tg.contentSafeAreaInset.left),
+          right: Math.max(
+            tg.safeAreaInset.right,
+            tg.contentSafeAreaInset.right
+          ),
+        });
       }
     };
 
@@ -88,6 +96,7 @@ export function useTelegramWebApp(): TelegramWebAppHookResult {
           tg.requestFullscreen();
           tg.lockOrientation();
         }
+
         updateSafeAreaVars(tg);
       }
 
@@ -133,7 +142,15 @@ export function useTelegramWebApp(): TelegramWebAppHookResult {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-  return { isReady, isMobile, user, platform, colorScheme, telegramWebApp };
+  return {
+    isReady,
+    isMobile,
+    user,
+    platform,
+    colorScheme,
+    telegramWebApp,
+    areaInsets,
+  };
 }
 
 export default useTelegramWebApp;

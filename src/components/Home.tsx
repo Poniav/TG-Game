@@ -1,7 +1,8 @@
 import Fish from "@/assets/elements/fish.png";
 import bg from "@/assets/elements/bg.png";
-
+import useTelegramWebApp from "@/hooks/useTelegramApp";
 const Home = () => {
+  const { areaInsets } = useTelegramWebApp();
   return (
     <div className="relative w-full h-full pb-16 overflow-hidden">
       {/* Background image with proper styling to cover the full height */}
@@ -12,6 +13,10 @@ const Home = () => {
           backgroundSize: "cover",
           backgroundPosition: "center",
           backgroundRepeat: "no-repeat",
+          paddingBottom: `${areaInsets.bottom}px`,
+          paddingTop: `${areaInsets.top}px`,
+          paddingLeft: `${areaInsets.left}px`,
+          paddingRight: `${areaInsets.right}px`,
         }}
       />
       <img src={bg} alt="bg" className="w-full h-full object-cover" />

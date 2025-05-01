@@ -1,7 +1,11 @@
 import Menu from "@/components/Menu";
-import { useEffect } from "react";
+import { useTelegramWebApp } from "@/hooks/useTelegramApp";
+import { useEffect, useRef } from "react";
 
 const Wrapper = ({ children }: { children: React.ReactNode }) => {
+  const { isMobile, telegramWebApp } = useTelegramWebApp();
+  const contentRef = useRef<HTMLDivElement>(null);
+
   useEffect(() => {
     document.body.style.overflow = "hidden";
     document.body.style.position = "fixed";
@@ -19,6 +23,7 @@ const Wrapper = ({ children }: { children: React.ReactNode }) => {
       document.documentElement.style.overscrollBehavior = "";
     };
   }, []);
+
   return (
     <div className="app-wrapper">
       <div className="app-content">
