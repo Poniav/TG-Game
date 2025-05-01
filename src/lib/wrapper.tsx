@@ -7,15 +7,13 @@ const Wrapper = ({ children }: { children: React.ReactNode }) => {
   const contentRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    document.body.style.overflow = "hidden";
-    document.body.style.position = "fixed";
+    document.body.style.position = "relative";
     document.body.style.width = "100%";
-    document.body.style.height = "100%";
-    document.body.style.touchAction = "none";
-    document.documentElement.style.overscrollBehavior = "none";
+    document.body.style.height = "auto";
+    document.body.style.touchAction = "auto";
+    document.documentElement.style.overscrollBehavior = "auto";
 
     return () => {
-      document.body.style.overflow = "";
       document.body.style.position = "";
       document.body.style.width = "";
       document.body.style.height = "";

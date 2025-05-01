@@ -79,7 +79,6 @@ export function useTelegramWebApp(): TelegramWebAppHookResult {
 
       if (isMobileUser) {
         tg.expand();
-        //tg.disableVerticalSwipes();
         tg.enableVerticalSwipes();
         if (tg.isVersionAtLeast("8.0")) {
           tg.requestFullscreen();
