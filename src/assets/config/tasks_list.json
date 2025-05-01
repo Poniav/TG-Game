@@ -3,8 +3,9 @@
     "id": 1,
     "name": "Follow Marlin on Telegram",
     "alt": "TG",
+    "duration": "permanent",
     "points": 100,
-    "icon": "https://i.imgur.com/1234567890.png",
+    "icon": "https://cellar-c2.services.clever-cloud.com/ocean/icons-tg.svg",
     "link": "https://t.me/marlin_game",
     "completed": false
   },
@@ -12,8 +13,9 @@
     "id": 2,
     "name": "Join our discord server",
     "alt": "DISC",
+    "duration": "permanent",
     "points": 150,
-    "icon": "https://i.imgur.com/1234567890.png",
+    "icon": "https://cellar-c2.services.clever-cloud.com/ocean/icons-discorde.svg",
     "link": "https://discord.gg/marlin",
     "completed": false
   },
@@ -21,8 +23,9 @@
     "id": 3,
     "name": "Follow Marlin on Instagram",
     "alt": "INST",
+    "duration": "permanent",
     "points": 200,
-    "icon": "https://i.imgur.com/1234567890.png",
+    "icon": "https://cellar-c2.services.clever-cloud.com/ocean/icon-instagram.svg",
     "link": "https://www.instagram.com/marlin_game",
     "completed": false
   },
@@ -30,8 +33,9 @@
     "id": 4,
     "name": "Share the game on Twitter",
     "alt": "TW",
+    "duration": "permanent",
     "points": 200,
-    "icon": "https://i.imgur.com/1234567890.png",
+    "icon": "https://cellar-c2.services.clever-cloud.com/ocean/icons-x.svg",
     "link": "https://www.twitter.com/marlin_game",
     "completed": false
   },
@@ -39,8 +43,9 @@
     "id": 5,
     "name": "Share the game on Facebook",
     "alt": "FB",
+    "duration": "permanent",
     "points": 200,
-    "icon": "https://i.imgur.com/1234567890.png",
+    "icon": "https://cellar-c2.services.clever-cloud.com/ocean/icons-fb.svg",
     "link": "https://www.facebook.com/marlin_game",
     "completed": false
   }
