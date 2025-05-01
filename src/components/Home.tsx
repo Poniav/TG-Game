@@ -15,8 +15,6 @@ const Home = () => {
           backgroundRepeat: "no-repeat",
           paddingBottom: `${areaInsets.bottom}px`,
           paddingTop: `${areaInsets.top}px`,
-          paddingLeft: `${areaInsets.left}px`,
-          paddingRight: `${areaInsets.right}px`,
         }}
       />
       <img src={bg} alt="bg" className="w-full h-full object-cover" />

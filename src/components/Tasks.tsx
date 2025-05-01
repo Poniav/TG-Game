@@ -28,8 +28,6 @@ const Tasks = () => {
         style={{
           paddingBottom: `${areaInsets.bottom}px`,
           paddingTop: `${areaInsets.top}px`,
-          paddingLeft: `${areaInsets.left}px`,
-          paddingRight: `${areaInsets.right}px`,
         }}
       >
         <div className="flex flex-col items-center justify-center text-white mb-4">

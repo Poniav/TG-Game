@@ -16,8 +16,6 @@ interface TelegramWebAppHookResult {
   areaInsets: {
     top: number;
     bottom: number;
-    left: number;
-    right: number;
   };
 }
 
@@ -27,8 +25,6 @@ export function useTelegramWebApp(): TelegramWebAppHookResult {
   const [areaInsets, setAreaInsets] = useState({
     top: 0,
     bottom: 0,
-    left: 0,
-    right: 0,
   });
   const [user, setUser] = useState<TelegramWebAppHookResult["user"]>(null);
   const [platform, setPlatform] = useState<string>("");
@@ -52,16 +48,8 @@ export function useTelegramWebApp(): TelegramWebAppHookResult {
     const updateSafeAreaVars = (tg: TelegramWebApp) => {
       if (tg.contentSafeAreaInset && tg.safeAreaInset) {
         setAreaInsets({
-          top: Math.max(tg.safeAreaInset.top, tg.contentSafeAreaInset.top),
-          bottom: Math.max(
-            tg.safeAreaInset.bottom,
-            tg.contentSafeAreaInset.bottom
-          ),
-          left: Math.max(tg.safeAreaInset.left, tg.contentSafeAreaInset.left),
-          right: Math.max(
-            tg.safeAreaInset.right,
-            tg.contentSafeAreaInset.right
-          ),
+          top: tg.safeAreaInset.top + tg.contentSafeAreaInset.top,
+          bottom: tg.safeAreaInset.bottom + tg.contentSafeAreaInset.bottom,
         });
       }
     };
