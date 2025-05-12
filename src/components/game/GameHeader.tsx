@@ -1,6 +1,6 @@
 import React from "react";
 import { Heart } from "lucide-react";
-
+import useTelegramWebApp from "@/hooks/useTelegramApp";
 interface GameHeaderProps {
   score: number;
   lives: number;
@@ -8,8 +8,15 @@ interface GameHeaderProps {
 }
 
 const GameHeader: React.FC<GameHeaderProps> = ({ score, lives, maxLives }) => {
+  const { areaInsets } = useTelegramWebApp();
   return (
-    <div className="fixed top-0 left-0 right-0 flex justify-between items-center p-4 z-50">
+    <div
+      className="fixed top-0 left-0 right-0 flex justify-between items-center p-4 z-50"
+      style={{
+        paddingBottom: `${areaInsets.bottom}px`,
+        paddingTop: `${areaInsets.top}px`,
+      }}
+    >
       {/* Vies (à gauche) */}
       <div className="flex items-center">
         {Array.from({ length: maxLives }).map((_, index) => (
