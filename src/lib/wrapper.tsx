@@ -7,75 +7,34 @@ const Wrapper = ({ children }: { children: React.ReactNode }) => {
   const contentRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    // Mettre à jour le CSS pour empêcher le comportement de roulage/pull-to-refresh
-    const styleElement = document.createElement('style');
-    styleElement.textContent = `
-      html, body {
-        overscroll-behavior: none !important;
-        touch-action: pan-x pan-y !important;
-        height: 100% !important;
-        width: 100% !important;
-        position: fixed !important;
-        overflow: auto !important;
-      }
-      #root {
-        height: 100% !important;
-        width: 100% !important;
-        overflow: auto !important;
-      }
-    `;
-    document.head.appendChild(styleElement);
-
-    // Intercepter les événements de défilement pour éviter la rétraction
-    const preventSwipeDown = (e: TouchEvent) => {
-      // Empêcher le comportement de swipe down qui rétracte l'app
-      if (document.scrollingElement && document.scrollingElement.scrollTop <= 0 && e.touches) {
-        e.preventDefault();
-      }
-    };
+    // Configuration minimale pour le défilement sans affecter Telegram
+    document.body.style.overscrollBehavior = "none";
+    document.documentElement.style.overscrollBehavior = "none";
     
-    // Ajouter les gestionnaires d'événements
-    document.addEventListener('touchstart', preventSwipeDown, { passive: false });
-    document.addEventListener('touchmove', preventSwipeDown, { passive: false });
-    
-    // Fixer pour Telegram WebApp
+    // Fixer pour Telegram WebApp avec des modifications minimales
     if (telegramWebApp) {
-      // Empêcher l'application de se rétracter
-      telegramWebApp.disableClosingConfirmation();
-      telegramWebApp.expand(); // Étendre l'app à sa taille maximale
-      telegramWebApp.setBackgroundColor("#ffffff");
+      // Maximiser l'application sans changer sa couleur
+      telegramWebApp.expand();
       
-      // Désactiver le gesture de retour qui fait se rétracter l'app
-      if (telegramWebApp.BackButton) {
-        telegramWebApp.BackButton.hide();
-      }
-      
-      // Intercepter les événements de viewport changed pour maintenir l'expansion
-      const handleViewportChanged = () => {
-        if (telegramWebApp) {
-          telegramWebApp.expand();
-        }
-      };
-      
-      if (telegramWebApp.onEvent) {
-        telegramWebApp.onEvent('viewportChanged', handleViewportChanged);
+      // Restaurer la fonctionnalité de défilement sans interférer avec Telegram
+      const mainElement = document.querySelector('body');
+      if (mainElement) {
+        mainElement.style.height = '100%';
+        mainElement.style.width = '100%';
+        mainElement.style.overflow = 'auto';
       }
     }
 
     // Fonction de nettoyage
     return () => {
-      // Supprimer l'élément de style
-      if (styleElement && styleElement.parentNode) {
-        styleElement.parentNode.removeChild(styleElement);
-      }
+      document.body.style.overscrollBehavior = "";
+      document.documentElement.style.overscrollBehavior = "";
       
-      // Supprimer les écouteurs d'événements
-      document.removeEventListener('touchstart', preventSwipeDown);
-      document.removeEventListener('touchmove', preventSwipeDown);
-      
-      // Nettoyage des événements Telegram WebApp
-      if (telegramWebApp && telegramWebApp.offEvent) {
-        telegramWebApp.offEvent('viewportChanged');
+      const mainElement = document.querySelector('body');
+      if (mainElement) {
+        mainElement.style.height = '';
+        mainElement.style.width = '';
+        mainElement.style.overflow = '';
       }
     };
   }, [telegramWebApp]);
@@ -84,25 +43,15 @@ const Wrapper = ({ children }: { children: React.ReactNode }) => {
     <div 
       className="app-wrapper" 
       style={{ 
-        position: 'fixed',
-        top: 0,
-        left: 0,
-        right: 0,
-        bottom: 0,
-        height: '100%',
-        width: '100%',
-        overflow: 'hidden'
+        position: 'relative',
+        minHeight: '100vh'
       }}
     >
       <div 
         ref={contentRef}
         className="app-content" 
         style={{ 
-          height: '100%',
-          width: '100%',
           paddingBottom: '5rem',
-          overflow: 'auto',
-          WebkitOverflowScrolling: 'touch',
           position: 'relative'
         }}
       >

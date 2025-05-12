@@ -1,44 +1,31 @@
-/* styles.css - Pour être importé dans votre main.tsx */
+/* Styles minimalistes pour améliorer le défilement sans interférer avec Telegram */
 
-/* Styles globaux pour empêcher la rétraction de l'application Telegram */
-html, body, #root {
-  overscroll-behavior: none;
-  overflow: hidden;
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  width: 100%;
-  height: 100%;
-  touch-action: pan-x pan-y;
-}
-
-/* Classe spéciale pour les conteneurs de défilement interne */
-.scrollable-content {
-  overflow-y: auto;
-  -webkit-overflow-scrolling: touch;
-  height: 100%;
-  width: 100%;
-}
-
-/* Désactiver le pull-to-refresh sur mobile */
+/* Empêcher le comportement de pull-to-refresh sur mobile */
 body {
   overscroll-behavior-y: none;
 }
 
-/* Classe pour les éléments d'arrière-plan fixes */
-.fixed-background {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  z-index: -1;
+/* Rendre les zones cliquables plus grandes et plus réactives */
+.menu-item {
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
 }
 
-/* Style pour le contenu qui doit être au-dessus de l'arrière-plan */
-.content-above-background {
-  position: relative;
-  z-index: 1;
+/* Améliorer la réactivité des éléments cliquables */
+button, 
+a, 
+[role="button"], 
+input[type="button"], 
+input[type="submit"],
+.clickable {
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0.1);
+}
+
+/* Classe pour arrière-plan fixe */
+.fixed-background {
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
 }

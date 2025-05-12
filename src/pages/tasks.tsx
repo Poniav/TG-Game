@@ -7,7 +7,6 @@ const Tasks = () => {
     <div>
       <Wrapper>
         <Task />
-        <Menu />
       </Wrapper>
     </div>
   );

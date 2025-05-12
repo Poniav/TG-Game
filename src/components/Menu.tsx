@@ -27,7 +27,7 @@ const MenuItem: React.FC<MenuItemProps> = ({
     <div
       className={`flex flex-col items-center justify-center p-1 cursor-pointer transition-all duration-300 ${
         isActive ? "text-yellow-200 -translate-y-2" : "text-yellow-300"
-      }`}
+      } w-full h-full`}
       onClick={onClick}
     >
       <div className="relative w-12 h-12 flex items-center justify-center">
@@ -119,15 +119,20 @@ const Menu = () => {
 
         <div className="flex justify-around items-center h-full max-w-md mx-auto px-2">
           {menuItems.map((item) => (
-            <MenuItem
+            <div 
               key={item.path}
-              icon={item.icon}
-              activeIcon={item.activeIcon}
-              label={item.label}
-              path={item.path}
-              isActive={activePath === item.path}
+              className="w-1/4 h-full"
               onClick={() => handleNavigation(item.path)}
-            />
+            >
+              <MenuItem
+                icon={item.icon}
+                activeIcon={item.activeIcon}
+                label={item.label}
+                path={item.path}
+                isActive={activePath === item.path}
+                onClick={() => handleNavigation(item.path)}
+              />
+            </div>
           ))}
         </div>
       </div>
