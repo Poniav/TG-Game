@@ -8,9 +8,9 @@ const Tasks = () => {
   const [tasks, setTasks] = useState(tasksList);
   const { areaInsets } = useTelegramWebApp();
   return (
-    <div className="relative w-full h-screen pb-16 overflow-hidden">
+    <div className="relative w-full h-screen pb-16 overflow-y-auto" style={{ WebkitOverflowScrolling: "touch" }}>
       {/* Background image - pas de safe area */}
-      <div className="absolute inset-0 w-full h-full">
+      <div className="fixed inset-0 w-full h-full -z-10">
         <div
           style={{
             backgroundImage: `url(${bg})`,
@@ -19,15 +19,18 @@ const Tasks = () => {
             backgroundRepeat: "no-repeat",
             height: "100%",
             width: "100%",
+            backgroundAttachment: "fixed", /* Maintient le background fixe pendant le scroll */
           }}
         />
       </div>
       {/* List */}
       <div
-        className="absolute inset-0 w-full h-full p-4"
+        className="relative w-full h-full p-4 z-10"
         style={{
-          paddingBottom: `${areaInsets.bottom}px`,
+          paddingBottom: `calc(${areaInsets.bottom}px + 5rem)`, /* Ajout d'espace supplémentaire pour le menu */
           paddingTop: `${areaInsets.top}px`,
+          overflowY: "auto",
+          touchAction: "pan-y", /* Permettre le défilement vertical tactile */
         }}
       >
         {/* Header */}
