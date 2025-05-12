@@ -23,8 +23,8 @@ const Wrapper = ({ children }: { children: React.ReactNode }) => {
   }, []);
 
   return (
-    <div className="app-wrapper">
-      <div className="app-content">
+    <div className="app-wrapper" style={{ position: 'relative', minHeight: '100vh' }}>
+      <div className="app-content" style={{ paddingBottom: '5rem' }}>
         {children}
         <Menu />
       </div>

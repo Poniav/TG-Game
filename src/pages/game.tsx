@@ -37,17 +37,27 @@ const Game = () => {
 
     // Charger le nombre de vies au démarrage
     setLives(loadLives());
+    
+    // Fonction pour ajuster la taille du jeu au redimensionnement de la fenêtre
+    const handleResize = () => {
+      if (gameInstance.current) {
+        gameInstance.current.scale.resize(window.innerWidth, window.innerHeight - 80);
+      }
+    };
+    
+    // Ajouter un écouteur d'événement pour le redimensionnement
+    window.addEventListener('resize', handleResize);
 
     // Créer l'instance du jeu Phaser
     const newGame = new Phaser.Game({
       type: Phaser.CANVAS,
       width: window.innerWidth,
-      height: window.innerHeight,
+      height: window.innerHeight - 80, // 5rem = ~80px, ajuster la hauteur pour tenir compte du menu
       backgroundColor: "#87CEEB",
       parent: gameContainer.current,
       scene: [GameScene],
       scale: {
-        mode: Phaser.Scale.RESIZE,
+        mode: Phaser.Scale.FIT, // Changé à FIT pour s'assurer que le jeu reste dans le conteneur
         autoCenter: Phaser.Scale.CENTER_BOTH,
       },
       render: {
@@ -68,6 +78,9 @@ const Game = () => {
 
     // Cleanup
     return () => {
+      // Supprimer l'écouteur d'événement pour éviter les fuites de mémoire
+      window.removeEventListener('resize', handleResize);
+      
       if (gameInstance.current) {
         gameInstance.current.destroy(true);
         gameInstance.current = null;
@@ -162,7 +175,8 @@ const Game = () => {
           id="game-container"
           style={{
             width: "100%",
-            height: "100vh",
+            height: "calc(100vh - 5rem)", /* Soustrait la hauteur du menu (5rem) */
+            marginBottom: "5rem", /* Espace pour le menu */
           }}
         />
 
